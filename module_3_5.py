@@ -1,6 +1,3 @@
-from module_2_5 import result2
-
-
 def get_multiplied_digits (number):
     str_number = str(number)
     first = int(str_number[0])
