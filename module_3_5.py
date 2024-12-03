@@ -1,10 +1,10 @@
-def get_multiplied_digits (number):
+def get_multiplied_digits(number):
 
-    str_number = str(number)
-    first = int(str_number[0])
+    str_number=str(number).replace("0","")
+    first=int(str_number[0])
 
     if len(str_number) == 1:
-        return int (str_number)
+        return int(str_number)
 
     return first * get_multiplied_digits(int(str_number [1:]))
 
