@@ -13,7 +13,10 @@ class House:
         return F"Название: {self.name}, количество этажей: {self.number_of_floors}"
 
     def __eq__(self, other):
-        return self.number_of_floors == other.number_of_floors
+        if isinstance(other, House):
+            return self.number_of_floors == other.number_of_floors
+        elif isinstance(other, int):
+            return self.number_of_floors == other
 
     def __lt__(self, other):
         return self.number_of_floors < other.number_of_floors
