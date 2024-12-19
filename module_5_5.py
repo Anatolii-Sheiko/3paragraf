@@ -4,7 +4,7 @@ import time
 class User:
     def __init__(self, nickname: str, password: int, age: int):
         self.nickname = nickname
-        self.password = password
+        self.password = hash(password) # Изменение1: Хеширование пароля
         self.age = age
 
     def __str__(self):
@@ -32,7 +32,7 @@ class UrTube:
         self.current_user = None
 
     def register(self, nickname: str, password: str, age: int):
-        password = hash(password)
+        password = hash(password) # Изменение1: Хеширование пароля(здёсь все верно было это для пометки что везде он должен быть захешен)
         for user in self.users:
             if user.nickname == nickname:
                 print(f"Пользователь {nickname} уже существует")
@@ -46,6 +46,7 @@ class UrTube:
         self.current_user = None
 
     def log_in(self, login: str, password: str):
+        password = hash(password) # Изменение1: Хеширование пароля
         for user in self.users:
             if login == user.nickname and password == user.password:
                 self.current_user = user
@@ -73,8 +74,9 @@ class UrTube:
                     print('Вам нет 18 лет, пожалуйста, покиньте страницу')
                     return
 
-                for i in range(x.duration):
+                for i in range(1, x.duration + 1): #Изменение 2: начало отсчета с 1
                     print(i, end=' ')
+                    time.sleep(1) # Измненение 3: Пауза между секундами
                     x.time_now += 1
                 x.time_now = 0
                 print('Конец видео')
