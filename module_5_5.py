@@ -4,7 +4,7 @@ import time
 class User:
     def __init__(self, nickname: str, password: int, age: int):
         self.nickname = nickname
-        self.password = hash(password) # Изменение1: Хеширование пароля
+        self.password = password
         self.age = age
 
     def __str__(self):
@@ -32,13 +32,13 @@ class UrTube:
         self.current_user = None
 
     def register(self, nickname: str, password: str, age: int):
-        password = hash(password) # Изменение1: Хеширование пароля(здёсь все верно было это для пометки что везде он должен быть захешен)
+        # password = hash(password)
         for user in self.users:
             if user.nickname == nickname:
                 print(f"Пользователь {nickname} уже существует")
                 return
 
-        new_user = User(nickname, password, age)
+        new_user = User(nickname, hash(password), age) # Здесь само хеширование
         self.users.append(new_user)
         self.current_user = new_user
 
@@ -46,7 +46,7 @@ class UrTube:
         self.current_user = None
 
     def log_in(self, login: str, password: str):
-        password = hash(password) # Изменение1: Хеширование пароля
+        password = hash(password) # Здесь производится проверка
         for user in self.users:
             if login == user.nickname and password == user.password:
                 self.current_user = user
